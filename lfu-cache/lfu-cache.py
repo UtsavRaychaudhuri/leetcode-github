@@ -1,11 +1,26 @@
+        tail=self.freqmap[freq][1]
+        if head.next==tail:
+            del self.freqmap[freq]
+            if freq==self.minfreq:
+                self.minfreq+=1
+​
+    def addtofreqmap(self,node,freq):
+        if freq not in self.freqmap:
+            self.freqmap[freq]=self.createDLL()
+        head=self.freqmap[freq][0]
+        self.appendtoDLL(head,node)
+​
+        
+​
+    def get(self, key: int) -> int:
+        if key in self.hashmap:
             node=self.hashmap[key]
             self.hashmap[key].freq+=1
             freq=self.hashmap[key].freq
             self.removefromfreqmap(node,freq-1)
             self.addtofreqmap(node,freq)
-        else:
-            return -1
-        return self.hashmap[key].value
+            return self.hashmap[key].value
+        return -1
         
     def put(self, key: int, value: int) -> None:
         if self.capacity==0:
@@ -27,7 +42,3 @@
             self.addtofreqmap(self.hashmap[key],freq)
         else:
             freq=1
-            self.minfreq=1
-            node=DLL(key,value,1)
-            self.addtofreqmap(node=node,freq=freq)
-            self.hashmap[key]=node
