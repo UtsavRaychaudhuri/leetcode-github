@@ -1,3 +1,4 @@
+[Discussion Post (created on 2/0/2021 at 17:13)](https://leetcode.com/problems/regular-expression-matching/solution/)  
 <h2>10. Regular Expression Matching</h2><h3>Hard</h3><hr><div><p>Given an input string (<code>s</code>) and a pattern (<code>p</code>), implement regular expression matching with support for <code>'.'</code> and <code>'*'</code> where:<code>&nbsp;</code></p>
 
 <ul>
