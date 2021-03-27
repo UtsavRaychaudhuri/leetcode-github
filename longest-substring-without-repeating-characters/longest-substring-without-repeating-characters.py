@@ -1,24 +1,19 @@
-# Time Complexity:- O(n)
-# Space Complexity:- O(n)
-# Approach:- Maintain a dictionary over the window of elements we are seeing so far. If we encounter an element already seen before decrease the window to
-# the element that was encountered before in our window.
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        
-        dict = {}
-        
-        start = max_length = 0
-        
-        for i in range(len(s)):
-            if s[i] in dict and start <= dict[s[i]]:
-                start = dict[s[i]]+1
-            else:
-                max_length = max(max_length, i-start+1)
-            
-            dict[s[i]] = i
-        
-        return max_length
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        j=0
+        my_map={}
+        res=0
+        i=0
+        while i<len(s):
+            if s[i] in my_map and my_map[s[i]]>=j:
+                res=max(res,i-j)
+                j=my_map[s[i]]+1
+                my_map[s[i]]=i
+            else:
+                my_map[s[i]]=i
+            i+=1
+        return max(res,i-j)
+    
+            
+                
+                
