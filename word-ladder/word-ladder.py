@@ -1,32 +1,27 @@
-class Solution(object):
-    def ladderLength(self, beginWord, endWord, wordList):
-        """
-        :type beginWord: str
-        :type endWord: str
-        :type wordList: List[str]
-        :rtype: int
-        """
-        if not wordList or endWord not in wordList:
-            return 0
-        q=collections.deque([])
-        q.append(beginWord)
-        s="abcdefghijklmnopqrstuvwxyz"
-        my_set=set()
-        visited=set()
-        for i in wordList:
-            my_set.add(i)
-        res=1
-        visited.add(beginWord)
-        while(q):
-            size=len(q)
-            for i in range(size):
-                word=q.popleft()
-                for i in range(len(word)):
-                    for j in s:
-                        newword=word[:i]+j+word[i+1:]
-                        if newword in my_set and newword not in visited:
-                            if newword==endWord:
-                                return res+1
-                            q.append(newword)
-                            visited.add(newword)
-            res+=1
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        q=collections.deque([])
+        wordset=set(wordList)
+        q.append(beginWord)
+        seen=set()
+        res=0
+        if beginWord==endWord or endWord not in wordList:
+            return 0
+        res=0
+        chars=['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']
+        while(q):
+            res+=1
+            size=len(q)
+            for i in range(size):
+                ele=q.popleft()
+                if ele==endWord:
+                    return res
+                for i in range(len(ele)):
+                    for j in chars:
+                        newele = ele[:i]+j+ele[i+1:]
+                        if newele in wordset:
+                            q.append(newele)
+                            wordset.remove(newele)
+        return 0
+                        
+                        
